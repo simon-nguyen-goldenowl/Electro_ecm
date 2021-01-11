@@ -59,7 +59,7 @@ export default {
     },
     methods: {
         login() {
-            axios.post('/api/admin-login', {
+            axios.post('/api/admin/login', {
                 username: this.username,
                 password: this.password
             }).then(response => {

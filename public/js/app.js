@@ -2339,7 +2339,7 @@ __webpack_require__.r(__webpack_exports__);
       var result = confirm('do you want to log out?');
 
       if (result) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/logout').then(function (r) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/admin/logout').then(function (r) {
           _this2.$cookies.remove('token');
 
           _this2.$emit('user-logout', null);
@@ -2426,7 +2426,7 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/admin-login', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/admin/login', {
         username: this.username,
         password: this.password
       }).then(function (response) {
@@ -9479,7 +9479,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-453da344]{\n    margin: 20px;\n}\n.sort[data-v-453da344]{\n    cursor: pointer;\n}\n.click[data-v-453da344] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-453da344] :hover {\n    color: #D10024;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-453da344]{\r\n    margin: 20px;\n}\n.sort[data-v-453da344]{\r\n    cursor: pointer;\n}\n.click[data-v-453da344] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-453da344] :hover {\r\n    color: #D10024;\n}\r\n", ""]);
 
 // exports
 
@@ -9498,7 +9498,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-0abec434]{\n    margin: 20px;\n}\n.sort[data-v-0abec434]{\n    cursor: pointer;\n}\n.click[data-v-0abec434] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-0abec434] :hover {\n    color: #D10024;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-0abec434]{\r\n    margin: 20px;\n}\n.sort[data-v-0abec434]{\r\n    cursor: pointer;\n}\n.click[data-v-0abec434] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-0abec434] :hover {\r\n    color: #D10024;\n}\r\n", ""]);
 
 // exports
 
@@ -9517,7 +9517,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-c0a4aa76]{\n    margin-left: 20px;\n    margin-right: 20px;\n    margin-top: 20px;\n}\n.sort[data-v-c0a4aa76]{\n    cursor: pointer;\n}\n.click[data-v-c0a4aa76] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-c0a4aa76] :hover {\n    color: #D10024;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-c0a4aa76]{\r\n    margin-left: 20px;\r\n    margin-right: 20px;\r\n    margin-top: 20px;\n}\n.sort[data-v-c0a4aa76]{\r\n    cursor: pointer;\n}\n.click[data-v-c0a4aa76] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-c0a4aa76] :hover {\r\n    color: #D10024;\n}\r\n", ""]);
 
 // exports
 
@@ -9536,7 +9536,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-053fbb92]{\n    margin-left: 20px;\n    margin-right: 20px;\n    margin-top: 20px;\n}\n.sort[data-v-053fbb92]{\n    cursor: pointer;\n}\n.click[data-v-053fbb92] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-053fbb92] :hover {\n    color: #D10024;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-053fbb92]{\r\n    margin-left: 20px;\r\n    margin-right: 20px;\r\n    margin-top: 20px;\n}\n.sort[data-v-053fbb92]{\r\n    cursor: pointer;\n}\n.click[data-v-053fbb92] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-053fbb92] :hover {\r\n    color: #D10024;\n}\r\n", ""]);
 
 // exports
 
@@ -9555,7 +9555,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-640f3c56]{\n    margin:20px;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-640f3c56]{\r\n    margin:20px;\n}\r\n", ""]);
 
 // exports
 
@@ -9574,7 +9574,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-14a85894]{\n    margin-left: 20px;\n    margin-right: 20px;\n    margin-top: 20px;\n}\n.sort[data-v-14a85894]{\n    cursor: pointer;\n}\n.click[data-v-14a85894] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-14a85894] :hover {\n    color: #D10024;\n}\n\n", ""]);
+exports.push([module.i, "\n.card[data-v-14a85894]{\r\n    margin-left: 20px;\r\n    margin-right: 20px;\r\n    margin-top: 20px;\n}\n.sort[data-v-14a85894]{\r\n    cursor: pointer;\n}\n.click[data-v-14a85894] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-14a85894] :hover {\r\n    color: #D10024;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -9593,7 +9593,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-0458c4e8]{\n    margin-left: 20px;\n    margin-right: 20px;\n    margin-top: 20px;\n}\n.sort[data-v-0458c4e8]{\n    cursor: pointer;\n}\n.click[data-v-0458c4e8] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-0458c4e8] :hover {\n    color: #D10024;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-0458c4e8]{\r\n    margin-left: 20px;\r\n    margin-right: 20px;\r\n    margin-top: 20px;\n}\n.sort[data-v-0458c4e8]{\r\n    cursor: pointer;\n}\n.click[data-v-0458c4e8] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-0458c4e8] :hover {\r\n    color: #D10024;\n}\r\n", ""]);
 
 // exports
 
@@ -9612,7 +9612,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-60efb723]{\n    margin:20px;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-60efb723]{\r\n    margin:20px;\n}\r\n", ""]);
 
 // exports
 
@@ -9631,7 +9631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-ec6b6858]{\n    margin: 20px;\n}\n.sort[data-v-ec6b6858]{\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-ec6b6858]{\r\n    margin: 20px;\n}\n.sort[data-v-ec6b6858]{\r\n    cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -62960,13 +62960,13 @@ var ResultConstants = Object.freeze({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UrlConstants", function() { return UrlConstants; });
 var UrlConstants = Object.freeze({
-  user: "/api/users",
-  product: "/api/products",
-  category: "/api/categories",
-  brand: "/api/brands",
-  review: "/api/reviews",
-  order: "/api/orders",
-  status: "/api/statuses"
+  user: "/api/admin/users",
+  product: "/api/admin/products",
+  category: "/api/admin/categories",
+  brand: "/api/admin/brands",
+  review: "/api/admin/reviews",
+  order: "/api/admin/orders",
+  status: "/api/admin/statuses"
 });
 
 /***/ }),
@@ -64378,7 +64378,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 var ifAuthenticated = function ifAuthenticated(to, from, next) {
-  axios__WEBPACK_IMPORTED_MODULE_16___default.a.get('/api/checkAuthenticated').then(function () {
+  axios__WEBPACK_IMPORTED_MODULE_16___default.a.get('/api/admin/checkAuthenticated').then(function () {
     next();
   })["catch"](function () {
     return next('/login');
@@ -64386,7 +64386,7 @@ var ifAuthenticated = function ifAuthenticated(to, from, next) {
 };
 
 var ifLogged = function ifLogged(to, from, next) {
-  axios__WEBPACK_IMPORTED_MODULE_16___default.a.get('/api/checkAuthenticated').then(function () {
+  axios__WEBPACK_IMPORTED_MODULE_16___default.a.get('/api/admin/checkAuthenticated').then(function () {
     next('/');
   })["catch"](function () {
     return next();
@@ -64508,8 +64508,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\WORK\intern\ecm\Electro_ecm\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\WORK\intern\ecm\Electro_ecm\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -22,19 +22,25 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('admin-login', [AuthController::class, 'adminLogin']);
-Route::delete('logout', [AuthController::class, 'adminLogout']);
-
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::resource('users', UserController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('brands', BrandController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('orders', OrderController::class);
-    Route::resource('wishlists', WishlistController::class);
-    Route::resource('reviews', ReviewController::class);
-    Route::resource('statuses', StatusController::class);
-    Route::get('checkAuthenticated', function () {
-        return \App\Enums\ResultType::Success;
+Route::prefix('admin')->group(function () {
+    Route::post('login', [AuthController::class, 'adminLogin']);
+    Route::delete('logout', [AuthController::class, 'adminLogout']);
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::resource('users', UserController::class);
+        Route::resource('products', ProductController::class);
+        Route::resource('brands', BrandController::class);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('orders', OrderController::class);
+        Route::resource('wishlists', WishlistController::class);
+        Route::resource('reviews', ReviewController::class);
+        Route::resource('statuses', StatusController::class);
+        Route::get('checkAuthenticated', function () {
+            return \App\Enums\ResultType::Success;
+        });
     });
+});
+
+Route::prefix('user')->group(function () {
+    route::post('login', [AuthController::class, 'userLogin']);
+    route::get('test', [AuthController::class, 'test'])->middleware('checkJWT');
 });

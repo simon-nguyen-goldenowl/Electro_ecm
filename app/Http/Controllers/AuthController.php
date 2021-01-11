@@ -9,11 +9,14 @@ use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use App\Services\UserService;
 use Carbon\Carbon;
+use Firebase\JWT\JWT;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use mysql_xdevapi\Exception;
+use Throwable;
 
 class AuthController extends Controller
 {
@@ -45,6 +48,33 @@ class AuthController extends Controller
             session()->put('user', $user->id);
             return ResultType::Success;
         }
+    }
+    public function userLogin(Request $request) //apply JWT to authenticate
+    {
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $jwt = $this->generateToken($user);
+            return response()->json([
+                'token' => $jwt
+            ]);
+        }
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
+    protected function generateToken($user)
+    {
+        $key = config('jwt.secret_key');
+        $payload = [
+            "exp" => Carbon::now()->addMinutes(1)->timestamp,  // Maximum expiration time is one hour
+            "uid" => $user->id,
+        ];
+        return JWT::encode($payload, $key) ;
+    }
+    public function test(Request $request)
+    {
+        $user = JWT::decode($request['token'], config('jwt.secret_key'), array('HS256'));
+        return response()->json($user);
     }
     public function adminLogin(Request $request)
     {

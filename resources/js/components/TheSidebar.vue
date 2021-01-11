@@ -104,7 +104,7 @@ export default {
         logOut(){
             let result = confirm('do you want to log out?')
             if(result){
-                axios.delete('/api/logout').then(r => {
+                axios.delete('/api/admin/logout').then(r => {
                     this.$cookies.remove('token');
                     this.$emit('user-logout', null);
                     this.$router.push('/login');

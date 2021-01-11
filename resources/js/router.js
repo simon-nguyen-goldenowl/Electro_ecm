@@ -20,14 +20,14 @@ import UserProfile from "./pages/user/UserProfile";
 import UserCreateForm from "./pages/user/UserCreateForm";
 Vue.use(Router);
 const ifAuthenticated = (to, from, next) => {
-    axios.get('/api/checkAuthenticated').then(() => {
+    axios.get('/api/admin/checkAuthenticated').then(() => {
         next()
     }).catch(() => {
         return next('/login')
     })
 }
 const ifLogged = (to, from, next) => {
-    axios.get('/api/checkAuthenticated').then(() => {
+    axios.get('/api/admin/checkAuthenticated').then(() => {
         next('/')
     }).catch(() => {
         return next()
