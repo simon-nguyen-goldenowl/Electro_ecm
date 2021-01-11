@@ -66,15 +66,10 @@ class AuthController extends Controller
     {
         $key = config('jwt.secret_key');
         $payload = [
-            "exp" => Carbon::now()->addMinutes(1)->timestamp,  // Maximum expiration time is one hour
+            "exp" => Carbon::now()->addMinutes(15)->timestamp,  // Maximum expiration time is one hour
             "uid" => $user->id,
         ];
         return JWT::encode($payload, $key) ;
-    }
-    public function test(Request $request)
-    {
-        $user = JWT::decode($request['token'], config('jwt.secret_key'), array('HS256'));
-        return response()->json($user);
     }
     public function adminLogin(Request $request)
     {

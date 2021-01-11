@@ -42,5 +42,5 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('user')->group(function () {
     route::post('login', [AuthController::class, 'userLogin']);
-    route::get('test', [AuthController::class, 'test'])->middleware('checkJWT');
+    route::get('profile', [UserController::class, 'getProfile'])->middleware('checkJWT');
 });

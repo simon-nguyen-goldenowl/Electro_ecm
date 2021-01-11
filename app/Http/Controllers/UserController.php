@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Services\UserService;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,6 +49,13 @@ class UserController extends Controller
     {
         $data = $this->userService->getById($id);
         return response()->json($data);
+    }
+
+    public function getProfile(Request $request)
+    {
+        $payload = JWT::decode($request['token'], config('jwt.secret_key'), array('HS256'));
+        $user = $this->userService->getById($payload->uid);
+        return response()->json($user);
     }
     /**
      * Update the specified resource in storage.
