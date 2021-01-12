@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89eb6055-bbb0-44d0-9329-74af0f18d2ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Scraper/Laptop.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Scraper/Smartphone.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Services/CrawProductService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/electro-shop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/electro-shop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_17_033458_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_17_033458_create_categories_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,6 +167,10 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/fabpot/goutte" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lwr0FsO1f8SXrGSUFBAOM3KEYk" />
@@ -173,7 +183,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Services" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -187,18 +197,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WORK\intern\ecm\Electro_ecm\app\Services" />
+      <recent name="D:\WORK\intern\ecm\Electro_ecm\app\Scraper" />
       <recent name="D:\WORK\intern\electro\simon_ecm\electro-shop" />
       <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\app\Services" />
       <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\resources\js\pages\product" />
-      <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\app\Http\Requests" />
-      <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\app\Http\Controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\WORK\intern\ecm\Electro_ecm\app\Scraper\Smartphone" />
       <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\resources\js\Constants" />
       <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\resources\js\pages\product" />
       <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\app\Http\Controllers" />
       <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\app\Http\Controllers\Admin" />
-      <recent name="C:\Users\ASUS\PhpstormProjects\simon_ecm\electro-shop\resources\views\Components" />
     </key>
   </component>
   <component name="RunManager">
@@ -240,7 +250,8 @@
       <workItem from="1610098724727" duration="14000" />
       <workItem from="1610353858186" duration="96000" />
       <workItem from="1610354211351" duration="406000" />
-      <workItem from="1610354850574" duration="7752000" />
+      <workItem from="1610354850574" duration="7791000" />
+      <workItem from="1610419381819" duration="23727000" />
     </task>
     <servers />
   </component>
