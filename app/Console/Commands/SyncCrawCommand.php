@@ -41,15 +41,21 @@ class SyncCrawCommand extends Command
     {
         $products = CrawlProduct::where('is_sync', 0)->take(15)->get();
         foreach ($products as $crawl) {
-            $product = new Product();
-            $product->code = 'P' . strval(rand(0, 9999));
-            $product->name = $crawl->name;
-            $product->cate_id = $crawl->category;
-            $product->brand_id = $crawl->brand;
-            $product->price = $crawl->price;
-            $product->save();
-            $crawl->is_sync = 1;
-            $crawl->save();
+            $exist = Product::where('name', $crawl->name)->first();
+            if ($exist !== null) {
+                $exist->amount = $exist->amount + 1;
+                $exist->save();
+            } else {
+                $product = new Product();
+                $product->code = 'P' . strval(rand(0, 9999));
+                $product->name = $crawl->name;
+                $product->cate_id = $crawl->category;
+                $product->brand_id = $crawl->brand;
+                $product->price = $crawl->price;
+                $product->save();
+                $crawl->is_sync = 1;
+                $crawl->save();
+            }
         }
     }
 }

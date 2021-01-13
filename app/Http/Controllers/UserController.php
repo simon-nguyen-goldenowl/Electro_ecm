@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Services\NotificationService;
 use App\Services\UserService;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
@@ -17,9 +18,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $userService;
-    public function __construct(UserService $userService)
+    protected $notiService;
+    public function __construct(UserService $userService, NotificationService $notiService)
     {
         $this->userService = $userService;
+        $this->notiService = $notiService;
     }
     public function index(Request $request)
     {
@@ -39,6 +42,14 @@ class UserController extends Controller
         return response()->json($data);
     }
 
+    public function showAllNoti()
+    {
+        return $this->notiService->getNotifications();
+    }
+    public function readNoti()
+    {
+        return $this->notiService->readNotifications();
+    }
     /**
      * Display the specified resource.
      *
@@ -53,7 +64,7 @@ class UserController extends Controller
 
     public function getProfile(Request $request)
     {
-        $payload = JWT::decode($request['token'], config('jwt.secret_key'), array('HS256'));
+        $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
         $user = $this->userService->getById($payload->uid);
         return response()->json($user);
     }

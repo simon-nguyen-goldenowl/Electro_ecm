@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Throwable;
@@ -18,12 +19,11 @@ class VerifyJWTToken
      */
     public function handle(Request $request, Closure $next)
     {
-        $key = config('jwt.secret_key');
         try {
-            JWT::decode($request['token'], config('jwt.secret_key'), array('HS256'));
+            JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
             return $next($request);
-        } catch (\throwable $e) {
-            return response()->json("permission denided");
+        } catch (\Throwable $ex) {
+            return response()->json('permission denied');
         }
     }
 }

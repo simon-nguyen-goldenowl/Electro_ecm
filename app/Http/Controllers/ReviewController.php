@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DefaultType;
+use App\Models\User;
+use App\Notifications\ReviewSubmit;
 use App\Services\ReviewService;
+use App\Services\UserService;
+use Firebase\JWT\JWT;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -15,9 +20,11 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $reviewService;
-    public function __construct(ReviewService $reviewService)
+    protected $userService;
+    public function __construct(ReviewService $reviewService, UserService $userService)
     {
         $this->reviewService = $reviewService;
+        $this->userService = $userService;
     }
     public function index(Request $request)
     {
@@ -46,7 +53,15 @@ class ReviewController extends Controller
         $this->reviewService->create($request->input());
         return back()->with('message', 'Your review is submitted');
     }
-
+    public function submitReview(Request $request)
+    {
+         $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
+         $request['customer_id'] = $payload->uid;
+         $review = $this->reviewService->create($request->input());
+         $user = $this->userService->getById($payload->uid);
+         $user->notify(new ReviewSubmit($review));
+         return $review;
+    }
     /**
      * Display the specified resource.
      *@param  \Illuminate\Http\Request  $request

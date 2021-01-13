@@ -5,16 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89eb6055-bbb0-44d0-9329-74af0f18d2ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Scraper/Laptop.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Scraper/Smartphone.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/CrawProductService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/electro-shop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/electro-shop.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Notifications/ReviewSubmit.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Notifications/SubmitOrder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Services/NotificationService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_13_044534_create_notifications_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_17_033458_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_17_033458_create_categories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/SyncCrawCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/SyncCrawCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyJWTToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyJWTToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Components/Header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Components/Header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +253,9 @@
       <workItem from="1610353858186" duration="96000" />
       <workItem from="1610354211351" duration="406000" />
       <workItem from="1610354850574" duration="7791000" />
-      <workItem from="1610419381819" duration="23727000" />
+      <workItem from="1610419381819" duration="24364000" />
+      <workItem from="1610503290689" duration="10473000" />
+      <workItem from="1610515951028" duration="7678000" />
     </task>
     <servers />
   </component>

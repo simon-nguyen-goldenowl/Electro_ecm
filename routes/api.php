@@ -39,8 +39,10 @@ Route::prefix('admin')->group(function () {
         });
     });
 });
-
 Route::prefix('user')->group(function () {
     route::post('login', [AuthController::class, 'userLogin']);
     route::get('profile', [UserController::class, 'getProfile'])->middleware('checkJWT');
+    route::post('review/submit', [ReviewController::class, 'submitReview']);
+    route::get('notifications', [UserController::class, 'showAllNoti'])->middleware('checkJWT');
+    route::get('notifications/read', [UserController::class, 'readNoti'])->middleware('checkJWT');
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusType;
 use App\Http\Requests\OrderRequest;
+use App\Models\User;
+use App\Notifications\SubmitOrder;
 use App\Services\CartService;
 use App\Services\OrderService;
 use App\Services\ProductService;
