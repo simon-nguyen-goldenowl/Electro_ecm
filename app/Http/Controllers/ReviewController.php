@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Enums\DefaultType;
 use App\Models\User;
 use App\Notifications\ReviewSubmit;
+use App\Services\NotificationService;
 use App\Services\ReviewService;
 use App\Services\UserService;
 use Firebase\JWT\JWT;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,10 +21,15 @@ class ReviewController extends Controller
      */
     protected $reviewService;
     protected $userService;
-    public function __construct(ReviewService $reviewService, UserService $userService)
-    {
+    protected $notiService;
+    public function __construct(
+        ReviewService $reviewService,
+        UserService $userService,
+        NotificationService $notiService
+    ) {
         $this->reviewService = $reviewService;
         $this->userService = $userService;
+        $this->notiService = $notiService;
     }
     public function index(Request $request)
     {
@@ -59,8 +64,8 @@ class ReviewController extends Controller
          $request['customer_id'] = $payload->uid;
          $review = $this->reviewService->create($request->input());
          $user = $this->userService->getById($payload->uid);
-         $user->notify(new ReviewSubmit($review));
-         return $review;
+         $reviewNoti = new ReviewSubmit($review);
+         return $this->notiService->sendNotifications($reviewNoti);
     }
     /**
      * Display the specified resource.
@@ -73,7 +78,6 @@ class ReviewController extends Controller
         $data = $this->reviewService->getReview($product_id)->paginate($request['limit']);
         return response()->json($data);
     }
-
     /**
      * Show the form for editing the specified resource.
      *

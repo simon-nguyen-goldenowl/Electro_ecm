@@ -31,7 +31,7 @@ class ReviewSubmit extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['broadcast'];
     }
     /**
      * Get the array representation of the notification.
@@ -39,7 +39,7 @@ class ReviewSubmit extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toDatabase($notifiable)
+    public function toBroadcast($notifiable)
     {
         return [
             'review_content' => $this->review->content,
