@@ -29,5 +29,13 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'pusher' => [
+        'beams_instance_id' => 'afea1aa9-03e9-4409-8661-76fd562baf28',
+        'beams_secret_key' => '17AAF8B79E4ED17D10AF8670924664AE665BB0FCFB61B4F82D6DA3DDC7D91637',
+    ],
+    'onesignal' => [
+        'app_id' => env('ONESIGNAL_APP_ID'),
+        'rest_api_key' => env('ONESIGNAL_REST_API_KEY')
+    ],
 
 ];

@@ -7,6 +7,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\OneSignal\OneSignalChannel;
+use NotificationChannels\OneSignal\OneSignalMessage;
+use NotificationChannels\PusherPushNotifications\PusherChannel;
+use NotificationChannels\PusherPushNotifications\PusherMessage;
 
 class ReviewSubmit extends Notification
 {
@@ -31,19 +35,20 @@ class ReviewSubmit extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast'];
+        return [PusherChannel::class];
     }
     /**
      * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return array|OneSignalMessage|PusherMessage
      */
-    public function toBroadcast($notifiable)
+    public function toPushNotification()
     {
-        return [
-            'review_content' => $this->review->content,
-            'product_id' => $this->review->product_id,
-        ];
+        return PusherMessage::create()
+            ->web()
+            ->badge(1)
+            ->sound('success')
+            ->body("Your review í submitted! Thank you");
     }
 }

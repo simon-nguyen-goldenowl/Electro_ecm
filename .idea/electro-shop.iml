@@ -166,6 +166,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spomky-labs/base64url" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel-notification-channels/webpush" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel-notification-channels/pusher-push-notifications" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pusher/pusher-push-notifications" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/psr-http-message-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel-notification-channels/onesignal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/berkayk/onesignal-laravel" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
