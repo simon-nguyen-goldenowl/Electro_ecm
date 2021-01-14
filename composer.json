@@ -17,12 +17,16 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jeroennoten/laravel-adminlte": "^3.5",
+        "kreait/laravel-firebase": "^3.0",
+        "laravel-notification-channels/fcm": "~2.0",
+        "laravel-notification-channels/webpush": "^5.1",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
         "pusher/pusher-php-server": "~4.0",
-        "sendgrid/sendgrid": "^7.9"
+        "sendgrid/sendgrid": "^7.9",
+        "williamcruzme/laravel-fcm": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

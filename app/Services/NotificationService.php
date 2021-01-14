@@ -2,28 +2,21 @@
 
 namespace App\Services;
 
-use App\Models\Brand;
 use App\Models\User;
-use App\Notifications;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
 
 class NotificationService
 {
     protected $user;
-    protected $notification;
-    protected $namespace = 'App\\Notifications\\';
-    public function __construct(Request $request, Notification $notification)
+    public function __construct(Request $request)
     {
         $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
         $this->user = User::find($payload->uid);
-        $this->notification = $notification;
     }
     public function sendNotifications($notiType)
     {
-        $this->user->notify($notiType);
-        return 'ok';
+        return $this->user->notify($notiType);
     }
     public function getNotifications()
     {

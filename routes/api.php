@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use williamcruzme\FCM\Facades\Device;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,10 @@ Route::prefix('admin')->group(function () {
     });
 });
 Route::prefix('user')->group(function () {
+    Device::routes();
     route::post('login', [AuthController::class, 'userLogin']);
     route::get('profile', [UserController::class, 'getProfile'])->middleware('checkJWT');
-    route::post('review/submit', [ReviewController::class, 'submitReview']);
+    route::post('review/submit', [ReviewController::class, 'submitReview'])->middleware('checkJWT');
     route::get('notifications', [UserController::class, 'showAllNoti'])->middleware('checkJWT');
     route::get('notifications/read', [UserController::class, 'readNoti'])->middleware('checkJWT');
 });

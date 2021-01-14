@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\DefaultType;
-use App\Models\User;
 use App\Notifications\ReviewSubmit;
 use App\Services\NotificationService;
 use App\Services\ReviewService;
 use App\Services\UserService;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {

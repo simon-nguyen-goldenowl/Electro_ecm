@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use williamcruzme\FCM\Traits\HasDevices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +14,7 @@ class User extends Authenticatable
     use HasFactory;
     use SoftDeletes;
     use Notifiable;
+    use HasDevices;
 
     /**
      * The attributes that are mass assignable.

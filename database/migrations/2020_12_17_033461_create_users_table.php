@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('email')->unique();
+            $table->string('token_device')->nullable();
             $table->tinyInteger('is_admin')->default(0);
             $table->string('reset_key')->nullable();
             $table->timestamp('reset_key_time')->nullable();
