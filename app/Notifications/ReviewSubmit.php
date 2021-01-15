@@ -35,7 +35,7 @@ class ReviewSubmit extends Notification
      */
     public function via($notifiable)
     {
-        return [PusherChannel::class];
+        return [OneSignalChannel::class];
     }
     /**
      * Get the array representation of the notification.
@@ -45,10 +45,9 @@ class ReviewSubmit extends Notification
      */
     public function toPushNotification()
     {
-        return PusherMessage::create()
-            ->web()
-            ->badge(1)
-            ->sound('success')
-            ->body("Your review í submitted! Thank you");
+        return OneSignalMessage::create()
+            ->setSubject("Your review was submitted!")
+            ->setBody("Click here to see details.")
+            ->setUrl('http://onesignal.com');
     }
 }

@@ -46,7 +46,7 @@
                 <!-- /LOGO -->
 
                 <!-- SEARCH BAR -->
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="header-search">
                         <form>
                             <select class="input-select">
@@ -62,7 +62,7 @@
                 <!-- /SEARCH BAR -->
 
                 <!-- ACCOUNT -->
-                <div class="col-md-5 clearfix">
+                <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
@@ -84,36 +84,6 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>My Cart</span>
-                                <div class="qty">{{session()->get('totalItems')}}</div>
-                            </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    @foreach(array_slice(session()->get('cart_items'), 0, 4) as $item)
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="{{asset('assets/customer/img/' . $item['image'])}}" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">{{$item['name']}}</a></h3>
-                                                <h4 class="product-price"><span class="qty">{{$item['amount']}}x</span>${{$item['price']}}</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="cart-summary">
-                                    <small>{{session()->get('totalItems')}} Item(s) selected</small>
-                                    <h5>SUBTOTAL: ${{session()->get('totalPrices')}}</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="/carts">View All</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <i class="fa fa-bell"></i>
-                                <span>Notifications</span>
                                 <div class="qty">{{session()->get('totalItems')}}</div>
                             </a>
                             <div class="cart-dropdown">

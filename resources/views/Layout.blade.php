@@ -94,16 +94,14 @@
             })
         }
     </script>
-    <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
-        const beamsClient = new PusherPushNotifications.Client({
-            instanceId: 'afea1aa9-03e9-4409-8661-76fd562baf28',
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "a830cee9-2916-442e-8a4d-bb24ce33b6cb",
+            });
         });
-
-        beamsClient.start()
-            .then(() => beamsClient.addDeviceInterest('App.User.2')) //listen to user interest
-            .then(() => console.log('Successfully registered and subscribed!'))
-            .catch(console.error);
     </script>
     @stack('scripts')
 </body>

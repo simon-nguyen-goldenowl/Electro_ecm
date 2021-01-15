@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use mysql_xdevapi\Exception;
 use Throwable;
 
 class AuthController extends Controller
@@ -66,7 +65,7 @@ class AuthController extends Controller
     {
         $key = config('jwt.secret_key');
         $payload = [
-            "exp" => Carbon::now()->addMinutes(15)->timestamp,  // Maximum expiration time is one hour
+            "exp" => Carbon::now()->addDays(1)->timestamp,  // Maximum expiration time is one hour
             "uid" => $user->id,
         ];
         return JWT::encode($payload, $key) ;
