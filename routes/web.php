@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,8 @@ Route::get('/orders', [CustomerController::class,'displayOrderPage']);
 Route::get('/orders/{id}', [CustomerController::class,'displayOrderDetailPage']);
 Route::get('/password/forgot', [CustomerController::class, 'displayForgotPasswordPage']);
 Route::get('/password/reset/{id}', [CustomerController::class, 'displayResetPasswordPage']);
+Route::get('/search', [CustomerController::class, 'displaySearchPage']);
+
 
 //Routes are used to process cart resource
 Route::post('/carts/{id}', [CartController::class, 'addCart']);
@@ -66,7 +69,10 @@ Route::post('/password/check-mail', [AuthController::class,'checkMail']);
 Route::patch('/password/{id}/reset', [AuthController::class, 'resetPassword']);
 Route::patch('/password/{id}/change', [AuthController::class, 'changePassword']);
 
-//Routes are used to display admin page
+//Routes are used to proccess search
+Route::post('/search', [SearchController::class, 'submitSearch']);
+
+//Routes are used to display admin's side page
 Route::get('/admin', function () {
     return view('Admin');
 });

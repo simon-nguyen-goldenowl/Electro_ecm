@@ -4118,6 +4118,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var url = this.getUrl();
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
         _this.list_products = response.data;
+        console.log(url);
       });
     },
     getUrl: function getUrl() {
@@ -9574,7 +9575,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card[data-v-14a85894]{\r\n    margin-left: 20px;\r\n    margin-right: 20px;\r\n    margin-top: 20px;\n}\n.sort[data-v-14a85894]{\r\n    cursor: pointer;\n}\n.click[data-v-14a85894] {\r\n    cursor: pointer;\r\n    display: inline;\n}\n.click[data-v-14a85894] :hover {\r\n    color: #D10024;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.card[data-v-14a85894]{\n    margin-left: 20px;\n    margin-right: 20px;\n    margin-top: 20px;\n}\n.sort[data-v-14a85894]{\n    cursor: pointer;\n}\n.click[data-v-14a85894] {\n    cursor: pointer;\n    display: inline;\n}\n.click[data-v-14a85894] :hover {\n    color: #D10024;\n}\n\n", ""]);
 
 // exports
 

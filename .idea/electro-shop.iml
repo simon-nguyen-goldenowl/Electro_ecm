@@ -171,6 +171,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/psr-http-message-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel-notification-channels/onesignal" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/berkayk/onesignal-laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/loilo/fuse" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/wataridori/simple-fuzzy-search" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

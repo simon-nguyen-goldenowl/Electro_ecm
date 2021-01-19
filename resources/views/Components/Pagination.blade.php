@@ -1,3 +1,4 @@
+
 <div class="store-filter clearfix">
     <ul class="store-pagination">
         @if($products->lastPage()>5)

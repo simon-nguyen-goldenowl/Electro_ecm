@@ -34,6 +34,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <![endif]-->
 
 
@@ -71,6 +72,8 @@
 
     <!-- jQuery Plugins -->
     <script src="{{asset('assets/customer/js/jquery.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{asset('assets/customer/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/customer/js/slick.min.js')}}"></script>
     <script src="{{asset('assets/customer/js/nouislider.min.js')}}"></script>
@@ -93,6 +96,10 @@
                 }
             })
         }
+        $(document).on('click', function(){
+            let value = $(this).text();
+            $('#search-list').html("");
+        });
     </script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>

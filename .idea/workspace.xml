@@ -5,18 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89eb6055-bbb0-44d0-9329-74af0f18d2ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Services/SearchService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/customer/js/jquery-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/Pages/Search.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/electro-shop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/electro-shop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/ReviewSubmit.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/ReviewSubmit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/NotificationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/NotificationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Brand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Brand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/ProductService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ProductService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/SearchService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SearchService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/webpush.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/service-worker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/MainApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/MainApp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/TheFooter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/TheFooter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/pages/product/ProductList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/product/ProductList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Admin.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Components/Header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Components/Header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Components/Pagination.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Components/Pagination.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Components/ProductList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Components/ProductList.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +224,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
       <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/onesignal" />
       <path value="$PROJECT_DIR$/vendor/berkayk/onesignal-laravel" />
+      <path value="$PROJECT_DIR$/vendor/loilo/fuse" />
+      <path value="$PROJECT_DIR$/vendor/wataridori/simple-fuzzy-search" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lwr0FsO1f8SXrGSUFBAOM3KEYk" />
@@ -223,7 +238,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Services" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -299,7 +314,14 @@
       <workItem from="1610610424058" duration="3479000" />
       <workItem from="1610615324204" duration="6021000" />
       <workItem from="1610676057325" duration="9332000" />
-      <workItem from="1610693987560" duration="4664000" />
+      <workItem from="1610693987560" duration="5581000" />
+      <workItem from="1610702403824" duration="5649000" />
+      <workItem from="1610790237675" duration="3472000" />
+      <workItem from="1610935670311" duration="8242000" />
+      <workItem from="1610943981262" duration="2606000" />
+      <workItem from="1610946640338" duration="5198000" />
+      <workItem from="1610955466302" duration="11801000" />
+      <workItem from="1611022783196" duration="321000" />
     </task>
     <servers />
   </component>

@@ -169,6 +169,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
       <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/onesignal" />
       <path value="$PROJECT_DIR$/vendor/berkayk/onesignal-laravel" />
+      <path value="$PROJECT_DIR$/vendor/loilo/fuse" />
+      <path value="$PROJECT_DIR$/vendor/wataridori/simple-fuzzy-search" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

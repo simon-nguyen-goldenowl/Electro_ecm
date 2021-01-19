@@ -45,7 +45,15 @@ class Product extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
     //FILTER FUNCTIONS
+    public function scopeId($query, $request)
+    {
+        if ($request->has('id')) {
+            $query->where('id', $request->input('id'));
+        }
+        return $query;
+    }
     public function scopeCategory($query, $request)
     {
         if ($request->has('cate_id')) {

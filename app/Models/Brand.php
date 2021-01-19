@@ -21,4 +21,14 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    //FILTER FUNCTION
+    public function scopeName($query, $request)
+    {
+        if ($request->has('name')) {
+            $name = $request->input('name');
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+        return $query;
+    }
 }

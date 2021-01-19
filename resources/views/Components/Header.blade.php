@@ -48,14 +48,17 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <option value="0">All categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                        <form action="/search" method="post">
+                            @csrf
+                            <select class="input-select" id="search-select" name="cate_id">
+                                    <option value="">All categories</option>
+                                @foreach($categories as $cate)
+                                    <option value="{{$cate->id}}">{{$cate->name}}</option>
+                                @endforeach
                             </select>
-                            <input class="input" placeholder="Search here">
+                            <input class="input" id="search-auto" name="search_name" placeholder="Search brands or product's names" onkeypress="autoComplete(this.value)">
                             <button class="search-btn">Search</button>
+                            <div id="search-list" style="cursor: pointer"></div>
                         </form>
                     </div>
                 </div>
@@ -67,10 +70,10 @@
                         <!-- Wishlist -->
                         <div>
                             @if(session()->has('user'))
-                            <a href="/wishlists" class="wishlist">
-                                <i class="fa fa-heart-o"></i>
-                                <span>My Wishlist</span>
-                            </a>
+                                <a href="/wishlists" class="wishlist">
+                                    <i class="fa fa-heart-o"></i>
+                                    <span>My Wishlist</span>
+                                </a>
                             @else
                                 <a href="" class="wishlist" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-heart-o "></i>
@@ -154,6 +157,7 @@
         </div>
     </div>
 </div>
+
 <script>
  function getLogin() {
      $.ajax({
@@ -176,7 +180,6 @@
      })
  }
  function getLogout(){
-
      if(confirm('Do you want to log out?')) {
          $.ajax({
              type: 'post',
@@ -187,5 +190,16 @@
              }
          })
      }
+ }
+ function autoComplete(value){
+     let cate = $("#search-select").val();
+     $.ajax({
+         type: 'get',
+         url: '/api/search/autocomplete?cate_id=' + cate + '&name=' + value,
+         success: function (data) {
+             $('#search-list').html(data);
+             console.log(data);
+         }
+     })
  }
 </script>

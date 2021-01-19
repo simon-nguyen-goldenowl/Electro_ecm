@@ -4,7 +4,7 @@
     <!-- product -->
     @if(count($products) == 0)
         <div class="middle">
-            <img style="text-align: center" src="assets/customer/img/no_product.jpg" alt="">
+            <img style="text-align: center" src="{{asset('assets/customer/img/no_product.jpg')}}" alt="">
         </div>
     @endif
     @if(session()->has('message'))
@@ -92,20 +92,22 @@
             }
         };
         function filter(){
-
+            let data = {
+                'brand_id': brand,
+                'min_price': minPrice,
+                'max_price': maxPrice,
+                'column': 'price',
+                'sort': sort,
+                'limit': limit,
+                'page': current_page
+            };
+            if(cate !== null) {
+                data.cate_id = cate;
+            }
             $.ajax({
                 type: 'get',
                 url: '/product-list',
-                data: {
-                    'brand_id': brand,
-                    'cate_id': cate,
-                    'min_price': minPrice,
-                    'max_price': maxPrice,
-                    'column': 'price',
-                    'sort': sort,
-                    'limit': limit,
-                    'page': current_page
-                },
+                data: data,
                 success:function(data){
                     $('#proID').html(data);
                     $("#page" + current_page).css('color','#D10024')

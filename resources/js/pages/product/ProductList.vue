@@ -191,6 +191,7 @@ export default {
             axios.get(url)
                 .then(response=> {
                 this.list_products = response.data;
+                    console.log(url)
                 });
         },
         getUrl(){

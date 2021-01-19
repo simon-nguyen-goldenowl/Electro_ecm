@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DefaultType;
 use App\Services\BrandService;
 use App\Services\CartService;
 use App\Services\CategoryService;
@@ -43,25 +44,8 @@ class CustomerController extends Controller
         $this->userService = $userService;
         $this->orderService = $orderService;
     }
+
     //COMMON FUNCTIONS
-    public function getListProduct(Request $request)
-    {
-        return $this->productService->getAllProducts($request);
-    }
-    public function getDetailProduct($id)
-    {
-        return $this->productService->getById($id);
-    }
-    public function getListCategory(Request $request)
-    {
-        return $this->categoryService->getAllCategories($request);
-    }
-
-    public function getListBrand(Request $request)
-    {
-        return $this->brandService->getAllBrands($request);
-    }
-
     protected function getNewProduct(Request $request)
     {
         $request['newest'] = null;
@@ -79,53 +63,40 @@ class CustomerController extends Controller
         $request['limit'] = 3;
         return $this->reviewService->getAllReviews($request);
     }
-    protected function getRelatedProduct(Request $request, $id)
-    {
-        return $this->productService->getRelatedProduct($request, $id);
-    }
-    protected function addCart(Request $request)
-    {
-        $this->cartService->addCart($request);
-    }
+
     //FUNCTION TO DISPLAY INDEX PAGE
     public function displayIndexPage(Request $request)
     {
-        $cate = $this->getListCategory($request);
         $new = $this->getNewProduct($request);
         unset($request['newest']); //to get the correct top-selling list (no depend on newest)
         $top = $this->getTopSellingProduct($request);
         return view('Pages.Index')->with([
-            'categories' => $cate,
             'new_products' => $new,
             'top_products' => $top,
         ]);
     }
+
     //FUNCTION TO DISPLAY STORE PAGE
     public function displayStorePage(Request $request)
     {
-        if (!isset($request['cate_id'])) {
-            return redirect('/products?cate_id=1');
-        }
-        $cate = $this->getListCategory($request);
-        $brand = $this->getListBrand($request);
-        $product = $this->getListProduct($request);
-
+        $brand = $this->brandService->getAllBrands($request);
+        $product = $this->productService->getAllProducts($request);
         unset($request['brand_id']); //to get the correct top-selling list (no depend on brand)
         $top = $this->getTopSellingProduct($request);
         return view('Pages.Store')->with([
            'brands' => $brand,
-           'categories' => $cate,
            'top_products' => $top,
            'products' => $product,
         ]);
     }
-    //FUNCTION TO DISPLAY PRODUCT_LIST COMPONENT IN STORE PAGE
+
+    //FUNCTION TO DISPLAY PRODUCT_LIST COMPONENT
     public function displayProductListComponent(Request $request)
     {
         if (!isset($request['limit'])) {
-            $request['limit'] = 15; //set default value for pagination
+            $request['limit'] = DefaultType::default_limit; //set default value for pagination
         }
-        $product = $this->getListProduct($request);
+        $product = $this->productService->getAllProducts($request);
         return view('Components.ProductList')->with([
            'products' => $product,
         ]);
@@ -134,12 +105,12 @@ class CustomerController extends Controller
     //FUNCTION TO DISPLAY PRODUCT PAGE
     public function displayProductPage(Request $request, $id)
     {
-        $detail = $this->getDetailProduct($id);
+        $detail = $this->productService->getById($id);
         if ($detail === null) {
             abort(404);
         }
         $review = $this->getRelatedReview($request, $id);
-        $related = $this->getRelatedProduct($request, $id);
+        $related = $this->productService->getRelatedProduct($request, $id);
 
         return view('Pages.Product')->with([
             'related' => $related,
@@ -147,6 +118,7 @@ class CustomerController extends Controller
             'reviews' => $review
         ]);
     }
+
     //FUNCTION TO DISPLAY REVIEW_LIST COMPONENT IN PRODUCT PAGE
     public function displayReviewListComponent(Request $request, $id)
     {
@@ -156,6 +128,26 @@ class CustomerController extends Controller
             'id' => $id
         ]);
     }
+
+    //FUNCTION TO DISPLAY SEARCH PAGE
+    public function displaySearchPage(Request $request)
+    {
+        $brand = $this->brandService->getAllBrands($request);
+        $product = $this->productService->getAllProducts($request);
+        unset($request['brand_id']); //to get the correct top-selling list (no depend on brand)
+        $top = $this->getTopSellingProduct($request);
+        $key = null;
+        if ($request['q'] !== null) {
+            $key = $request['q'];
+        }
+        return view('Pages.Search')->with([
+            'brands' => $brand,
+            'top_products' => $top,
+            'products' => $product,
+            'key' => $key
+        ]);
+    }
+
     //FUNCTION TO DISPLAY CHECKOUT PAGE
     public function displayCheckoutPage()
     {
@@ -176,17 +168,20 @@ class CustomerController extends Controller
         $this->cartService->checkCart();
         return view('Pages.Cart');
     }
+
     //FUNCTION TO DISPLAY REGISTER PAGE
     public function displayRegisterPage()
     {
         return view('Pages.Register');
     }
+
     //FUNCTION TO DISPLAY WISHLIST PAGE
     public function displayWishlistPage()
     {
         $data = $this->wishlistService->showWishlist();
         return view('Pages.Wishlist')->with('items', $data);
     }
+
     //FUNCTION TO DISPLAY PROFILE PAGE
     public function displayProfilePage()
     {
@@ -197,6 +192,7 @@ class CustomerController extends Controller
             return back();
         }
     }
+
     //FUNCTION TO DISPLAY CHANGE PASSWORD PAGE
     public function displayChangePasswordPage()
     {
@@ -206,6 +202,7 @@ class CustomerController extends Controller
             return back();
         }
     }
+
     //FUNCTION TO DISPLAY ORDER PAGE
     public function displayOrderPage()
     {
@@ -216,6 +213,7 @@ class CustomerController extends Controller
             return back();
         }
     }
+
     //FUNCTION TO DISPLAY ORDER_DETAIL PAGE
     public function displayOrderDetailPage($id)
     {
@@ -232,11 +230,13 @@ class CustomerController extends Controller
             'total' => $total
         ]);
     }
+
     //FUNCTION TO DISPLAY FORGOT PASSWORD PAGE
     public function displayForgotPasswordPage()
     {
         return view('Pages.ForgotPassword');
     }
+
     //FUNCTION TO DISPLAY RESET PASSWORD PAGE
     public function displayResetPasswordPage($id)
     {

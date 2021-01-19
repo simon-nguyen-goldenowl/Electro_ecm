@@ -29,9 +29,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        /*VIEW SHARING DATA*/
+        $cate = Category::all();
+        view::share('categories', $cate);
         View::share('user', session()->get('user'));
 
+        /*CUSTOM VALIDATION RULES*/
         //CATEGORY EXIST VALIDATION
         Validator::extend('checkCateExisted', function ($attribute, $value, $parameters, $validator) {
             $Category = Category::find($value);
