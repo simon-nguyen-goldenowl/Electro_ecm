@@ -14,14 +14,10 @@ class SearchController extends Controller
     }
     public function autoComplete(Request $request)
     {
-        return $this->searchService->showSearchList($request);
+        return $this->searchService->showSuggestList($request);
     }
     public function submitSearch(Request $request)
     {
-        $result = $this->searchService->fuzzySearch($request);
-//        if ($result > 0) {
-//            return redirect('/brands/' . $result);
-//        }
-        return $result;
+        return redirect('/search?q=' . $request['q']);
     }
 }

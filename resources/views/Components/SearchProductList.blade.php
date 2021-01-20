@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="product-body">
-                    <p class="product-category">{{$product->category->name}} - {{$product->brand->name}}</p>
+                    <p class="product-category">{{$product->cate}} - {{$product->brand}}</p>
                     <h3 class="product-name"><a href="/products/{{$product->id}}">{{$product->name}}</a></h3>
                     <h4 class="product-price">${{$product->price}}</h4>
                     <div class="product-btns">
@@ -58,7 +58,7 @@
     <div class="clearfix visible-sm visible-xs"></div>
 </div>
 <!-- store bottom filter -->
-    @include('Components.Pagination', ['products' => $products])
+@include('Components.SearchPagination', ['paginate' => $paginate])
 <!-- /store bottom filter -->
 @push('scripts')
     <script>
@@ -69,7 +69,6 @@
         }
         function filter(){
             let data = {
-                'brand_id': brand,
                 'min_price': minPrice,
                 'max_price': maxPrice,
                 'column': 'price',
@@ -77,12 +76,12 @@
                 'limit': limit,
                 'page': current_page
             };
-            if(cate !== null) {
-                data.cate_id = cate;
+            if(key !== null) {
+                data.q = key;
             }
             $.ajax({
                 type: 'get',
-                url: '/product-list',
+                url: '/search-list',
                 data: data,
                 success:function(data){
                     $('#proID').html(data);

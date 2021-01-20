@@ -9,6 +9,7 @@ use App\Services\CategoryService;
 use App\Services\OrderService;
 use App\Services\ProductService;
 use App\Services\ReviewService;
+use App\Services\SearchService;
 use App\Services\UserService;
 use App\Services\WishlistService;
 use Carbon\Carbon;
@@ -21,6 +22,7 @@ class CustomerController extends Controller
     protected $categoryService;
     protected $brandService;
     protected $reviewService;
+    protected $searchService;
     protected $cartService;
     protected $wishlistService;
     protected $userService;
@@ -33,7 +35,8 @@ class CustomerController extends Controller
         CartService $cartService,
         WishlistService $wishlistService,
         UserService $userService,
-        OrderService $orderService
+        OrderService $orderService,
+        SearchService $searchService
     ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
@@ -43,6 +46,7 @@ class CustomerController extends Controller
         $this->wishlistService = $wishlistService;
         $this->userService = $userService;
         $this->orderService = $orderService;
+        $this->searchService = $searchService;
     }
 
     //COMMON FUNCTIONS
@@ -133,7 +137,10 @@ class CustomerController extends Controller
     public function displaySearchPage(Request $request)
     {
         $brand = $this->brandService->getAllBrands($request);
-        $product = $this->productService->getAllProducts($request);
+        $result = $this->searchService->getSearchProducts($request);
+        $total = count($result);
+        $product = $this->searchService->proccessSearchList($request, $result, $total);
+        $paginate = $this->searchService->generatePaginate($request, $total);
         unset($request['brand_id']); //to get the correct top-selling list (no depend on brand)
         $top = $this->getTopSellingProduct($request);
         $key = null;
@@ -144,10 +151,23 @@ class CustomerController extends Controller
             'brands' => $brand,
             'top_products' => $top,
             'products' => $product,
-            'key' => $key
+            'paginate' => $paginate,
+            'key' => $key,
+            'total' => $total
         ]);
     }
-
+    //FUNCTION TO DISPLAY LIST COMPONENT
+    public function displaySearchListComponent(Request $request)
+    {
+        $result = $this->searchService->getSearchProducts($request);
+        $total = count($result);
+        $product = $this->searchService->proccessSearchList($request, $result, $total);
+        $paginate = $this->searchService->generatePaginate($request, $total);
+        return view('Components.SearchProductList')->with([
+            'products' => $product,
+            'paginate' => $paginate
+        ]);
+    }
     //FUNCTION TO DISPLAY CHECKOUT PAGE
     public function displayCheckoutPage()
     {

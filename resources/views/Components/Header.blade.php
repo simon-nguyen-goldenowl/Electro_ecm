@@ -56,7 +56,7 @@
                                     <option value="{{$cate->id}}">{{$cate->name}}</option>
                                 @endforeach
                             </select>
-                            <input class="input" id="search-auto" name="search_name" placeholder="Search brands or product's names" onkeypress="autoComplete(this.value)">
+                            <input class="input" id="search-auto" name="q" placeholder="Search brands or product's names" onkeypress="autoComplete(this.value)">
                             <button class="search-btn">Search</button>
                             <div id="search-list" style="cursor: pointer"></div>
                         </form>
@@ -195,10 +195,9 @@
      let cate = $("#search-select").val();
      $.ajax({
          type: 'get',
-         url: '/api/search/autocomplete?cate_id=' + cate + '&name=' + value,
+         url: '/autocomplete?cate_id=' + cate + '&name=' + value,
          success: function (data) {
              $('#search-list').html(data);
-             console.log(data);
          }
      })
  }

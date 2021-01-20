@@ -49,23 +49,6 @@
 
                     <!-- aside Widget -->
                     <div class="aside">
-                        <h3 class="aside-title">Brand</h3>
-                        <div class="checkbox-filter">
-                            @foreach($brands as $brand)
-                                <div class="input-checkbox">
-                                    <input type="checkbox" class="brandID" name="brand" id="brand-{{$brand->id}}" value="{{$brand->id}}">
-                                    <label for="brand-{{$brand->id}}">
-                                        <span></span>
-                                        {{$brand->name}}
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <!-- /aside Widget -->
-
-                    <!-- aside Widget -->
-                    <div class="aside">
                         <h3 class="aside-title">Top selling</h3>
                         @foreach($top_products as $top)
                             <div class="product-widget">
@@ -90,6 +73,7 @@
                     <!-- store top filter -->
                     <div class="store-filter clearfix">
                         @if($key !== null)
+                            <h4><p>{{$total}} results found for: "{{$key}}"</p></h4>
                         <div class="store-sort">
                             <label>
                                 Sort By Price:
@@ -117,10 +101,10 @@
 
                     <!-- store products -->
                     <div id="proID">
-                        @include('Components.ProductList')
+                        @include('Components.SearchProductList')
                     </div>
                     @else
-                        <h1>Nothing to found</h1>
+                        <h1>Nothing found</h1>
                         <h3>Back to <a href="/">Home Page</a></h3>
                     @endif
                 </div>
@@ -134,14 +118,12 @@
 @stop
 @push('scripts')
     <script>
+        let key= params.get('q');
         let limit= 15
         let current_page = 1
         let minPrice
         let maxPrice
-        let cate= params.get('cate_id');
-        let brand
         let sort = 'asc'
-        $("#"+cate).css('color','#D10024');
         $(".price").keyup(function (){
             minPrice= $("#price-min").val();
             maxPrice = $("#price-max").val();
@@ -164,14 +146,5 @@
             current_page = 1
             filter();
         })
-        $(".brandID").click(function (){
-            brand = new Array();
-            $("input[name='brand']:checked").each(function (){
-                brand.push(this.value);
-            })
-            current_page = 1
-            filter();
-        })
-
     </script>
 @endpush

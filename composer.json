@@ -31,7 +31,7 @@
         "pusher/pusher-php-server": "~4.0",
         "sendgrid/sendgrid": "^7.9",
         "wataridori/simple-fuzzy-search": "^0.1.1",
-        "williamcruzme/laravel-fcm": "^1.0"
+        "williamcruzme/laravel-fcm": "^1.0",
     },
     "require-dev": {
         "facade/ignition": "^2.5",

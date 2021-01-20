@@ -38,6 +38,7 @@ Route::get('/orders/{id}', [CustomerController::class,'displayOrderDetailPage'])
 Route::get('/password/forgot', [CustomerController::class, 'displayForgotPasswordPage']);
 Route::get('/password/reset/{id}', [CustomerController::class, 'displayResetPasswordPage']);
 Route::get('/search', [CustomerController::class, 'displaySearchPage']);
+Route::get('/search-list', [CustomerController::class, 'displaySearchListComponent']);
 
 
 //Routes are used to process cart resource
@@ -71,6 +72,7 @@ Route::patch('/password/{id}/change', [AuthController::class, 'changePassword'])
 
 //Routes are used to proccess search
 Route::post('/search', [SearchController::class, 'submitSearch']);
+route::get('/autocomplete', [SearchController::class,'autoComplete']);
 
 //Routes are used to display admin's side page
 Route::get('/admin', function () {

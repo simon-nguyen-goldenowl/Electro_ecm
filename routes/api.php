@@ -51,6 +51,4 @@ Route::prefix('user')->group(function () {
     route::get('notifications', [UserController::class, 'showAllNoti'])->middleware('checkJWT');
     route::get('notifications/read', [UserController::class, 'readNoti'])->middleware('checkJWT');
 });
-Route::prefix('search')->group(function () {
-    route::get('autocomplete', [SearchController::class,'autoComplete']);
-});
+
