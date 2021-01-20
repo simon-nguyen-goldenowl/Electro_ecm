@@ -29,6 +29,7 @@ use williamcruzme\FCM\Facades\Device;
 Route::prefix('admin')->group(function () {
     Route::post('login', [AuthController::class, 'adminLogin']);
     Route::delete('logout', [AuthController::class, 'adminLogout']);
+    Route::resource('brands', BrandController::class);
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('products', ProductController::class);
@@ -37,7 +38,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('wishlists', WishlistController::class);
         Route::resource('reviews', ReviewController::class);
         Route::resource('statuses', StatusController::class);
-        Route::resource('brands', BrandController::class);
+
         Route::get('checkAuthenticated', function () {
             return \App\Enums\ResultType::Success;
         });

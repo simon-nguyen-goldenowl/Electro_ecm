@@ -98,25 +98,7 @@ class CustomerController extends Controller
 
     public function test()
     {
-        $client = ClientBuilder::create()->build();
-        $products = Product::where('is_sync_es', 0)->take(15)->get();
-        foreach ($products as $product) {
-            $params = [
-                'index' => 'products',
-                'id'    => $product->id,
-                'body'  => [
-                    'name' => $product->name,
-                    'price' => $product->price,
-                    'cate_id' => $product->cate_id,
-                    'brand_id' => $product->brand_id,
-                    'cate_name' => $product->category->name,
-                    'brand_name' => $product->brand->name
-                ]
-            ];
-            $client->index($params);
-            $product->is_sync_es = 1;
-            $product->save();
-        }
+        return Product::find(1)->name;
     }
     //FUNCTION TO DISPLAY PRODUCT_LIST COMPONENT
     public function displayProductListComponent(Request $request)

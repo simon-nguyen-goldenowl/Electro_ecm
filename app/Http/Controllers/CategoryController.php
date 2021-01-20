@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ESIndexType;
 use App\Enums\ResultType;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Services\CategoryService;
 use App\Services\ProductService;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     protected $categoryService;
     protected $productService;
-    public function __construct(CategoryService $categoryService, ProductService $productService)
-    {
+    protected $searchService;
+    public function __construct(
+        CategoryService $categoryService,
+        ProductService $productService,
+        SearchService $searchService
+    ) {
         $this->categoryService = $categoryService;
         $this->productService = $productService;
+        $this->searchService = $searchService;
     }
     /**
      * Display a listing of the resource.
@@ -60,6 +67,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, $id)
     {
         $data = $this->categoryService->update($id, $request->input());
+        $this->searchService->syncDataAfterUpdate($id, $request->input(), ESIndexType::CategoryIndex);
         return response()->json($data);
     }
     /**
@@ -76,6 +84,7 @@ class CategoryController extends Controller
             return response()->json(ResultType::Failure);
         }
         $this->categoryService->delete($id);
+        $this->searchService->syncDataAfterDelete(ESIndexType::CategoryIndex, $id);
         return response()->json(ResultType::Success);
     }
 }

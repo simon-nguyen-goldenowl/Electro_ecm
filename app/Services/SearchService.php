@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Enums\DefaultType;
+use App\Enums\ESIndexType;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use wataridori\SFS\SimpleFuzzySearch;
@@ -12,15 +14,56 @@ use Elasticsearch\ClientBuilder;
 class SearchService
 {
     protected $client;
-
-
-    public function indexDocument()
+    public function __construct()
     {
-        $param = [
-            'index' => 'my_index',
-            'id'    => 'my_id',
-            'body'  => ['testField' => 'abc']
+        $this->client = ClientBuilder::create()->build();
+    }
+    public function syncDataAfterUpdate($id, $request, $index)
+    {
+        //This function is used to sync data between database and elastic search after update record
+        switch ($index) {
+            case ESIndexType::ProductIndex:
+                $cate_name = Category::find($request['cate_id'])->name;
+                $brand_name = Brand::find($request['brand_id'])->name;
+                $params = [
+                    'index' => $index,
+                    'id'    => $id,
+                    'body'  => [
+                        'doc' => [
+                            'name' => $request['name'],
+                            'price' => $request['price'],
+                            'cate_id' => $request['cate_id'],
+                            'brand_id' => $request['brand_id'],
+                            'cate_name' => $cate_name,
+                            'brand_name' => $brand_name
+                        ]
+                    ]
+                ];
+                $this->client->update($params);
+                break;
+            case ESIndexType::CategoryIndex:
+            case ESIndexType::BrandIndex:
+                $params = [
+                'index' => $index,
+                'id'    => $id,
+                'body'  => [
+                    'doc' => [
+                        'name' => $request['name'],
+                    ]
+                ]
+                ];
+                $this->client->update($params);
+                break;
+        }
+    }
+    public function syncDataAfterDelete($index, $id)
+    {
+        //This function is used to sync data between database and elastic search after delete record
+        $params = [
+            'index' => $index,
+            'id'    => $id
         ];
+        $this->client->delete($params);
     }
     public function showSuggestList(Request $request)
     {

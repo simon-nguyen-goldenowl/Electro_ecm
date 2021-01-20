@@ -30,7 +30,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         /*VIEW SHARING DATA*/
-
+        $cate = Category::all();
+        view::share('categories', $cate);
+        View::share('user', session()->get('user'));
 
         /*CUSTOM VALIDATION RULES*/
         //CATEGORY EXIST VALIDATION

@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ESIndexType;
 use App\Enums\ResultType;
 use App\Http\Requests\BrandCreateRequest;
 use App\Http\Requests\BrandUpdateRequest;
 use App\Services\BrandService;
 use App\Services\ProductService;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
     protected $brandService;
     protected $productService;
-    public function __construct(BrandService $brandService, ProductService $productService)
-    {
+    protected $searchService;
+    public function __construct(
+        BrandService $brandService,
+        ProductService $productService,
+        SearchService $searchService
+    ) {
         $this->brandService = $brandService;
         $this->productService = $productService;
+        $this->searchService = $searchService;
     }
     /**
      * Display a listing of the resource.
@@ -61,6 +68,7 @@ class BrandController extends Controller
     public function update(BrandUpdateRequest $request, $id)
     {
         $data = $this->brandService->update($id, $request->input());
+        $this->searchService->syncDataAfterUpdate($id, $request->input(), ESIndexType::BrandIndex);
         return response()->json($data);
     }
 
@@ -78,6 +86,7 @@ class BrandController extends Controller
             return response()->json(ResultType::Failure);
         }
         $this->brandService->delete($id);
+        $this->searchService->syncDataAfterDelete(ESIndexType::BrandIndex, $id);
         return response()->json(ResultType::Success);
     }
 }
