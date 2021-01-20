@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('craw_link')->nullable();
+            $table->integer('is_sync_es')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

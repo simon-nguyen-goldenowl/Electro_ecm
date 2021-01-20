@@ -39,7 +39,7 @@ Route::get('/password/forgot', [CustomerController::class, 'displayForgotPasswor
 Route::get('/password/reset/{id}', [CustomerController::class, 'displayResetPasswordPage']);
 Route::get('/search', [CustomerController::class, 'displaySearchPage']);
 Route::get('/search-list', [CustomerController::class, 'displaySearchListComponent']);
-
+Route::get('/test', [CustomerController::class, 'test']);
 
 //Routes are used to process cart resource
 Route::post('/carts/{id}', [CartController::class, 'addCart']);

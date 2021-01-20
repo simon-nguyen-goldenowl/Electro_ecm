@@ -27,8 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('scrape:product')->daily();
-        $schedule->command('scrape:sync')->everyMinute();
+        //$schedule->command('scrape:product')->daily();
+        //$schedule->command('scrape:sync')->everyMinute();
+        $schedule->command('es:sync')->everyThreeMinutes();
     }
 
     /**
