@@ -30,9 +30,10 @@ Route::prefix('admin')->group(function () {
     Route::post('login', [AuthController::class, 'adminLogin']);
     Route::delete('logout', [AuthController::class, 'adminLogout']);
     Route::resource('brands', BrandController::class);
+    Route::resource('products', ProductController::class);
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::resource('users', UserController::class);
-        Route::resource('products', ProductController::class);
+
         Route::resource('categories', CategoryController::class);
         Route::resource('orders', OrderController::class);
         Route::resource('wishlists', WishlistController::class);

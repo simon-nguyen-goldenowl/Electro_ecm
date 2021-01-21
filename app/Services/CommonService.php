@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\DefaultType;
+use App\Enums\ESStatusType;
 use App\Enums\ResultType;
 use http\Env\Request;
 
@@ -40,6 +41,7 @@ abstract class CommonService implements IService
 
     public function update($id, $request)
     {
+        $request['es_status'] =  ESStatusType::IsUpdated;
         $data = $this->model->find($id);
         if ($data) {
             $data->update($request);

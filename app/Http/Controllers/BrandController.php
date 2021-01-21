@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ESIndexType;
+use App\Enums\ESStatusType;
 use App\Enums\ResultType;
 use App\Http\Requests\BrandCreateRequest;
 use App\Http\Requests\BrandUpdateRequest;
@@ -67,8 +68,8 @@ class BrandController extends Controller
      */
     public function update(BrandUpdateRequest $request, $id)
     {
+        $request['es_status'] = ESStatusType::IsUpdated;
         $data = $this->brandService->update($id, $request->input());
-        $this->searchService->syncDataAfterUpdate($id, $request->input(), ESIndexType::BrandIndex);
         return response()->json($data);
     }
 

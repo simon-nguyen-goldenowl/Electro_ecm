@@ -18,44 +18,6 @@ class SearchService
     {
         $this->client = ClientBuilder::create()->build();
     }
-    public function syncDataAfterUpdate($id, $request, $index)
-    {
-        //This function is used to sync data between database and elastic search after update record
-        switch ($index) {
-            case ESIndexType::ProductIndex:
-                $cate_name = Category::find($request['cate_id'])->name;
-                $brand_name = Brand::find($request['brand_id'])->name;
-                $params = [
-                    'index' => $index,
-                    'id'    => $id,
-                    'body'  => [
-                        'doc' => [
-                            'name' => $request['name'],
-                            'price' => $request['price'],
-                            'cate_id' => $request['cate_id'],
-                            'brand_id' => $request['brand_id'],
-                            'cate_name' => $cate_name,
-                            'brand_name' => $brand_name
-                        ]
-                    ]
-                ];
-                $this->client->update($params);
-                break;
-            case ESIndexType::CategoryIndex:
-            case ESIndexType::BrandIndex:
-                $params = [
-                'index' => $index,
-                'id'    => $id,
-                'body'  => [
-                    'doc' => [
-                        'name' => $request['name'],
-                    ]
-                ]
-                ];
-                $this->client->update($params);
-                break;
-        }
-    }
     public function syncDataAfterDelete($index, $id)
     {
         //This function is used to sync data between database and elastic search after delete record

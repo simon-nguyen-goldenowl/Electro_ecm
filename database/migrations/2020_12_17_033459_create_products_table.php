@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('price');
             $table->integer('amount')->default(1);
-            $table->integer('is_sync_es')->default(0);
+            $table->integer('es_status')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use App\Console\Crobjob\SyncElasticSearch;
 use Illuminate\Console\Command;
 
-class SyncDataElasticSearch extends Command
+class SyncDeletedDataESCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'ES:Sync';
+    protected $signature = 'es:deleted';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Sync data from database to elastic search';
+    protected $description = 'Sync deleted data from database to elastic search';
 
     /**
      * Create a new command instance.
@@ -39,8 +39,8 @@ class SyncDataElasticSearch extends Command
     public function handle()
     {
         $es_sync = new SyncElasticSearch();
-        $es_sync->indexProductDocument();
-        $es_sync->indexBrandDocument();
-        $es_sync->indexCategoryDocument();
+        $es_sync->syncDeletedProduct();
+        $es_sync->syncDeletedCategory();
+        $es_sync->syncDeletedBrand();
     }
 }

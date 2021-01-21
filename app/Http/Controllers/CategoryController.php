@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ESIndexType;
+use App\Enums\ESStatusType;
 use App\Enums\ResultType;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
@@ -66,8 +67,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, $id)
     {
+        $request['es_status'] = ESStatusType::IsUpdated;
         $data = $this->categoryService->update($id, $request->input());
-        $this->searchService->syncDataAfterUpdate($id, $request->input(), ESIndexType::CategoryIndex);
         return response()->json($data);
     }
     /**

@@ -98,7 +98,7 @@ class CustomerController extends Controller
 
     public function test()
     {
-        return Product::find(1)->name;
+        return Product::onlyTrashed()->get();
     }
     //FUNCTION TO DISPLAY PRODUCT_LIST COMPONENT
     public function displayProductListComponent(Request $request)

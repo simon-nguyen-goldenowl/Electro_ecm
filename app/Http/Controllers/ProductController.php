@@ -80,7 +80,6 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, $id)
     {
         $data = $this->productService->update($id, $request->input());
-        $this->searchService->syncDataAfterUpdate($id, $request->input(), ESIndexType::ProductIndex);
         return response()->json($data);
     }
 
