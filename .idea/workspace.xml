@@ -5,23 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89eb6055-bbb0-44d0-9329-74af0f18d2ed" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/electro-shop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/electro-shop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/SyncDataElasticSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/SyncCreatedDataESCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/ScrapeCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/ScrapeCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Console/Crobjob/SyncElasticSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Crobjob/SyncElasticSearch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BrandController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BrandController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Brand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Brand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/CommonService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/CommonService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/BrandService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/BrandService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/CategoryService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/CategoryService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/NotificationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/NotificationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/OrderService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/ReviewService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ReviewService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Services/SearchService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SearchService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_17_033057_create_brands_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_17_033057_create_brands_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_17_033458_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_17_033458_create_categories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_17_033459_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_17_033459_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Components/Header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Components/Header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Components/SearchProductList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Components/SearchProductList.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,6 +229,7 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/williamcruzme/laravel-fcm" />
+      <path value="$PROJECT_DIR$/vendor/predis/predis" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lwr0FsO1f8SXrGSUFBAOM3KEYk" />
@@ -326,7 +334,22 @@
       <workItem from="1611128989338" duration="182000" />
       <workItem from="1611129642907" duration="1357000" />
       <workItem from="1611131063450" duration="8037000" />
-      <workItem from="1611195356015" duration="8163000" />
+      <workItem from="1611195356015" duration="18217000" />
+      <workItem from="1611217857845" duration="7542000" />
+      <workItem from="1611232687859" duration="250000" />
+      <workItem from="1611282869769" duration="8626000" />
+      <workItem from="1611297169428" duration="6543000" />
+      <workItem from="1611305142592" duration="4849000" />
+      <workItem from="1611497296113" duration="138000" />
+      <workItem from="1611498497684" duration="690000" />
+      <workItem from="1611540413529" duration="3591000" />
+      <workItem from="1611545531600" duration="16976000" />
+      <workItem from="1611568446090" duration="4087000" />
+      <workItem from="1611576706935" duration="176000" />
+      <workItem from="1611627203690" duration="15819000" />
+      <workItem from="1611647224153" duration="9525000" />
+      <workItem from="1611663232624" duration="755000" />
+      <workItem from="1611713451966" duration="5089000" />
     </task>
     <servers />
   </component>

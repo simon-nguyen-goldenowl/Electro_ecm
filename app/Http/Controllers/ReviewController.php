@@ -55,15 +55,15 @@ class ReviewController extends Controller
         $this->reviewService->create($request->input());
         return back()->with('message', 'Your review is submitted');
     }
-    public function submitReview(Request $request)
-    {
-         $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
-         $request['customer_id'] = $payload->uid;
-         $review = $this->reviewService->create($request->input());
-         $user = $this->userService->getById($payload->uid);
-         $reviewNoti = new ReviewSubmit($review);
-         return $this->notiService->sendNotifications($reviewNoti);
-    }
+//    public function submitReview(Request $request)
+//    {
+//         $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
+//         $request['customer_id'] = $payload->uid;
+//         $review = $this->reviewService->create($request->input());
+//         $user = $this->userService->getById($payload->uid);
+//         $reviewNoti = new ReviewSubmit($review);
+//         return $this->notiService->sendNotifications($reviewNoti);
+//    }
     /**
      * Display the specified resource.
      *@param  \Illuminate\Http\Request  $request

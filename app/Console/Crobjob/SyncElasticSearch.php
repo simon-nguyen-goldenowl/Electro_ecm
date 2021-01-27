@@ -23,6 +23,8 @@ class SyncElasticSearch
         $products = Product::where('es_status', ESStatusType::IsNotSynced)
             ->with('brand')
             ->with('category')
+            ->with('orderDetail')
+            ->with('review')
             ->take(100)->get();
         foreach ($products as $product) {
             $params = [
@@ -31,10 +33,14 @@ class SyncElasticSearch
                 'body' => [
                     'name' => $product->name,
                     'price' => $product->price,
+                    'amount' => $product->amount,
+                    'image' => $product->image,
                     'cate_id' => $product->cate_id,
                     'brand_id' => $product->brand_id,
                     'cate_name' => $product->category->name,
-                    'brand_name' => $product->brand->name
+                    'brand_name' => $product->brand->name,
+                    'review' => $product->review->count(),
+                    'selling' => $product->orderDetail->sum('amount')
                 ]
             ];
             $this->client->index($params);
@@ -83,6 +89,8 @@ class SyncElasticSearch
         $products = Product::where('es_status', ESStatusType::IsUpdated)
             ->with('brand')
             ->with('category')
+            ->with('orderDetail')
+            ->with('review')
             ->take(100)->get();
         foreach ($products as $product) {
             $params = [
@@ -92,10 +100,14 @@ class SyncElasticSearch
                     'doc' => [
                         'name' => $product->name,
                         'price' => $product->price,
+                        'amount' => $product->amount,
+                        'image' => $product->image,
                         'cate_id' => $product->cate_id,
                         'brand_id' => $product->brand_id,
                         'cate_name' => $product->category->name,
-                        'brand_name' => $product->brand->name
+                        'brand_name' => $product->brand->name,
+                        'review' => $product->review->count(),
+                        'selling' => $product->orderDetail->sum('amount')
                     ]
                 ]
             ];

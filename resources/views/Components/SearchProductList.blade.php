@@ -16,16 +16,16 @@
         <div class="col-md-4 col-xs-6">
             <div class="product" >
                 <div class="product-img">
-                    <img src="{{asset('assets/customer/img/' . $product->image)}}" alt="">
+                    <img src="{{asset('assets/customer/img/' . $product['image'])}}" alt="">
                     <div class="product-label">
                         <span class="sale">-30%</span>
                         <span class="new">NEW</span>
                     </div>
                 </div>
                 <div class="product-body">
-                    <p class="product-category">{{$product->cate}} - {{$product->brand}}</p>
-                    <h3 class="product-name"><a href="/products/{{$product->id}}">{{$product->name}}</a></h3>
-                    <h4 class="product-price">${{$product->price}}</h4>
+                    <p class="product-category">{{$product['cate_name']}} - {{$product['brand_name']}}</p>
+                    <h3 class="product-name"><a href="/products/{{$product['id']}}">{{$product['name']}}</a></h3>
+                    <h4 class="product-price">${{$product['price']}}</h4>
                     <div class="product-btns">
                         @if(session()->get('user') === null)
                             <button class="add-to-wishlist" data-toggle="modal" data-target="#exampleModal">
@@ -33,7 +33,7 @@
                                 <span class="tooltipp" >add to wishlist</span>
                             </button>
                         @else
-                            <button class="add-to-wishlist" onclick="addWishlist({{$product->id}})">
+                            <button class="add-to-wishlist" onclick="addWishlist({{$product['id']}})">
                                 <i class="fa fa-heart-o"></i><span class="tooltipp" >add to wishlist</span>
                             </button>
                         @endif
@@ -42,8 +42,8 @@
                     </div>
                 </div>
                 <div class="add-to-cart">
-                    @if($product->amount > 0)
-                        <form action="/carts/{{$product->id}}" method="post">
+                    @if($product['amount'] > 0)
+                        <form action="/carts/{{$product['id']}}" method="post">
                             @csrf
                             <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</button>
                         </form>

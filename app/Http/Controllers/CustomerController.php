@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DefaultType;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Services\BrandService;
 use App\Services\CartService;
@@ -96,9 +97,9 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function test()
+    public function test(Request $request)
     {
-        return Product::onlyTrashed()->get();
+        return $this->searchService->fuzzySearch($request['q'], 0, 15);
     }
     //FUNCTION TO DISPLAY PRODUCT_LIST COMPONENT
     public function displayProductListComponent(Request $request)
@@ -142,33 +143,34 @@ class CustomerController extends Controller
     //FUNCTION TO DISPLAY SEARCH PAGE
     public function displaySearchPage(Request $request)
     {
+        if ($request['q'] === null) {
+            return redirect('/');
+        }
         $brand = $this->brandService->getAllBrands($request);
-        $result = $this->searchService->getSearchProducts($request);
-        $total = count($result);
-        $product = $this->searchService->proccessSearchList($request, $result, $total);
-        $paginate = $this->searchService->generatePaginate($request, $total);
+        $attribute = $this->searchService->generateAttribute($request);
+        $result = $this->searchService->getSearchList($attribute);
+        $product = $this->searchService->generateSearchList($request, $result);
+        $total = $result['hits']['total']['value'];
+        $paginate = $this->searchService->generatePaginate($attribute, $total);
         unset($request['brand_id']); //to get the correct top-selling list (no depend on brand)
         $top = $this->getTopSellingProduct($request);
-        $key = null;
-        if ($request['q'] !== null) {
-            $key = $request['q'];
-        }
         return view('Pages.Search')->with([
             'brands' => $brand,
             'top_products' => $top,
             'products' => $product,
             'paginate' => $paginate,
-            'key' => $key,
+            'key' => $request['q'],
             'total' => $total
         ]);
     }
     //FUNCTION TO DISPLAY LIST COMPONENT
     public function displaySearchListComponent(Request $request)
     {
-        $result = $this->searchService->getSearchProducts($request);
-        $total = count($result);
-        $product = $this->searchService->proccessSearchList($request, $result, $total);
-        $paginate = $this->searchService->generatePaginate($request, $total);
+        $attribute = $this->searchService->generateAttribute($request);
+        $result = $this->searchService->getSearchList($attribute);
+        $product = $this->searchService->generateSearchList($request, $result);
+        $total = $result['hits']['total']['value'];
+        $paginate = $this->searchService->generatePaginate($attribute, $total);
         return view('Components.SearchProductList')->with([
             'products' => $product,
             'paginate' => $paginate

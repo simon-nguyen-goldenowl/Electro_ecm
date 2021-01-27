@@ -12,6 +12,7 @@
         "almasaeed2010/adminlte": "~3.0",
         "bensampo/laravel-enum": "^3.2",
         "berkayk/onesignal-laravel": "^1.0",
+        "elasticsearch/elasticsearch": "^7.0",
         "fabpot/goutte": "^4.0",
         "fideloper/proxy": "^4.4",
         "firebase/php-jwt": "^5.2",
@@ -28,11 +29,11 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
         "loilo/fuse": "^4.0",
+        "predis/predis": "^1.1",
         "pusher/pusher-php-server": "~4.0",
         "sendgrid/sendgrid": "^7.9",
         "wataridori/simple-fuzzy-search": "^0.1.1",
-        "williamcruzme/laravel-fcm": "^1.0",
-        "elasticsearch/elasticsearch": "^7.0"
+        "williamcruzme/laravel-fcm": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

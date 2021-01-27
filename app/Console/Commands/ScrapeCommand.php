@@ -20,7 +20,7 @@ class ScrapeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Scrape smartphone data from Lazada';
+    protected $description = 'Scrape smartphone data from ecommerce';
 
     /**
      * Create a new command instance.

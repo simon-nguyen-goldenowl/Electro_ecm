@@ -12,9 +12,11 @@ class SearchController extends Controller
     {
         $this->searchService = $searchService;
     }
-    public function autoComplete(Request $request)
+    public function autoCompleteSearch(Request $request)
     {
-        return $this->searchService->showSuggestList($request);
+        $key = $request['q'];
+        $result = $this->searchService->autoCompleteSearch($key);
+        return $this->searchService->showSuggestList($result, $key);
     }
     public function submitSearch(Request $request)
     {

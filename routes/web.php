@@ -72,7 +72,7 @@ Route::patch('/password/{id}/change', [AuthController::class, 'changePassword'])
 
 //Routes are used to proccess search
 Route::post('/search', [SearchController::class, 'submitSearch']);
-route::get('/autocomplete', [SearchController::class,'autoComplete']);
+route::get('/autocomplete', [SearchController::class,'autoCompleteSearch']);
 
 //Routes are used to display admin's side page
 Route::get('/admin', function () {

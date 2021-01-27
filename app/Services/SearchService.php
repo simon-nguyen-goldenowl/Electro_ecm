@@ -4,87 +4,174 @@ namespace App\Services;
 
 use App\Enums\DefaultType;
 use App\Enums\ESIndexType;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Http\Request;
-use wataridori\SFS\SimpleFuzzySearch;
 use Elasticsearch\ClientBuilder;
 
 class SearchService
 {
     protected $client;
+
     public function __construct()
     {
         $this->client = ClientBuilder::create()->build();
     }
-    public function syncDataAfterDelete($index, $id)
+
+    public function autoCompleteSearch($key)
     {
-        //This function is used to sync data between database and elastic search after delete record
         $params = [
-            'index' => $index,
-            'id'    => $id
+            'size' => '5',
+            'index' => 'products', //search in all indexes
+            'body'  => [
+                'query' => [
+                    "match_phrase_prefix" => [
+                        "name" => $key
+                    ]
+                ],
+            ]
         ];
-        $this->client->delete($params);
+        return $this->client->search($params);
     }
-    public function showSuggestList(Request $request)
+
+    public function multiMatchSearch($key, $from, $size)
     {
-        $data = $this->autoComplete($request);
-        $output = '';
-        if (count($data) > 0) {
-            $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
-            foreach ($data as $rows) {
-                foreach ($rows as $row) {
-                    $output .= '<li class="list-group-item"><a class="search-item" href="/search?q=' . $row->name . '">'
-                        . $row->name .
-                        '</a></li>';
-                }
+
+        $params = [
+            'from' => $from,
+            'size'   => $size,
+            'index' => ESIndexType::ProductIndex, //search in all indexes
+            'body'  => [
+                'query' => [
+                    'multi_match' => [
+                        'query' => $key,
+                        'type' => 'bool_prefix',
+                        'fields' => ['name','brand_name','cate_name']
+                    ],
+                ],
+            ]
+        ];
+        return $this->client->search($params);
+    }
+
+    public function fuzzySearch($key, $from, $size)
+    {
+        $params = [
+            'from' => $from,
+            'size'   => $size,
+            'index' => 'products',
+            'body'  => [
+                'query' => [
+                    'bool' => [
+                        'should' => [
+                            ['fuzzy' => ['name' => ['value' =>   $key, 'fuzziness' => '2']]],
+                            ['fuzzy' => ['brand_name' => ['value' =>   $key, 'fuzziness' => '2']]],
+                            ['fuzzy' => ['cate_name' => ['value' =>   $key, 'fuzziness' => '2']]],
+                        ]
+                    ]
+                ],
+            ]
+        ];
+        return $this->client->search($params);
+    }
+
+    public function preprocessSearchResult($results, $key)
+    {
+        $search_list = collect();
+        $highlight = '';
+        foreach ($results['hits']['hits'] as $item) {
+            $name = $item['_source']['name'];
+            if (stripos($name, $key) !== false) {
+                $highlight = str_ireplace($key, '<b>' . $key . '</b>', $name);
             }
-            $output .= '</ul>';
+            $search_list->push([
+                'id' => $item['_id'],
+                'index' => $item['_index'],
+                'name' => $item['_source']['name'],
+                'highlight' => $highlight,
+                'image' => $item['_source']['image'],
+                'price' => $item['_source']['price'],
+                'amount' => $item['_source']['amount'],
+                'selling' => $item['_source']['selling'],
+                'review' => $item['_source']['review'],
+                'brand_name' => $item['_source']['brand_name'],
+                'cate_name' => $item['_source']['cate_name'],
+            ]);
         }
-        return $output;
+        return $search_list;
     }
-    public function getSearchProducts(Request $request)
+
+    public function generateAttribute(Request $request)
     {
-        $key = $request['q'];
-        $products = Product::query()
-                            ->selectRaw('products.*, brands.name as brand, categories.name as cate')
-                            ->join('brands', 'brands.id', 'products.brand_id')
-                            ->join('categories', 'categories.id', 'products.cate_id')
-                            ->get();
-        $data = [];
-        foreach ($products as $product) {
-            array_push($data, $product);
-        }
-        $fuzzy = new SimpleFuzzySearch($data, ['name', 'brand' , 'cate']);
-        $results = $fuzzy->search($key);
-        return $results;
-    }
-    public function proccessSearchList(Request $request, $searchList, $totalProduct)
-    {
-        $perPage = $request['limit'];
-        $page = $request['page'];
-        $searchCollection = collect();
-        foreach ($searchList as $item) {
-            $searchCollection->push($item[0]);
-        }
-        if (isset($request['min_price'])) {
-            $searchCollection = $searchCollection->filter(function ($value, $key) use ($request) {
-                return $request['max_price'] > $value->price && $value->price > $request['min_price'];
-            });
-        }
-        return $searchCollection->forPage($page, $perPage);
-    }
-    public function generatePaginate(Request $request, $totalProduct)
-    {
-        $perPage = DefaultType::default_limit;
         $page = 1;
+        $size = DefaultType::default_limit; //size attribute of Elastic Search
+        if (isset($request['sort'])) {
+            $sort = $request['sort'];
+        }
         if (isset($request['limit'])) {
-            $perPage = $request['limit'];
+            $size = $request['limit'];
         }
         if (isset($request['page'])) {
             $page = $request['page'];
         }
+        $from = ($page - 1) * $size; //from attribute of Elastic Search
+        $key = $request['q'];
+        $attribute = [
+            'page' => $page,
+            'from' => $from,
+            'size' => $size,
+            'key' => $key
+        ];
+        return $attribute;
+    }
+
+    public function showSuggestList($result, $key)
+    {
+        $search_list = $this->preprocessSearchResult($result, $key);
+        $output = '';
+        if (count($search_list) > 0) {
+            // concatenate output to the array
+            $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+            // loop through the result array
+            foreach ($search_list as $row) {
+                // concatenate output to the array
+                $output .= '<li class="list-group-item">
+                                <a href="/search?q=' . $row['name'] . '">'
+                                    . $row['highlight'] .
+                                '</a></li>';
+            }
+            // end of output
+            $output .= '</ul>';
+        } else {
+            // if there's no matching results according to the input
+            $output .= '<li class="list-group-item">
+                        <a href="/search?q=' . $key . '">
+                                Search for: <b>' . $key .
+                        '</b></a></li>';
+        }
+        return $output;
+    }
+
+    public function getSearchList($attribute)
+    {
+        $key = $attribute['key'];
+        $from = $attribute['from'];
+        $size = $attribute['size'];
+        $result = $this->fuzzySearch($key, $from, $size);
+        if ($result['hits']['total']['value'] === 0) {
+            $result = $this->multiMatchSearch($key, $from, $size);
+        }
+        return $result;
+    }
+
+    public function generateSearchList(Request $request, $result)
+    {
+        $products = $this->preprocessSearchResult($result, $request['q']);
+        return $this->getFilter($request, $products);
+    }
+
+    public function generatePaginate($attribute, $totalProduct)
+    {
+        $page = $attribute['page'];
+        $perPage = $attribute['size'];
         $totalPage = strval(ceil($totalProduct / $perPage));
         $paginateCollection = collect([
             'currentPage' => $page,
@@ -92,5 +179,22 @@ class SearchService
             'lastPage' => $totalPage
         ]);
         return $paginateCollection;
+    }
+
+
+
+    public function getFilter(Request $request, $searchCollection)
+    {
+        if (isset($request['min_price'])) {
+            $searchCollection = $searchCollection->filter(function ($value, $key) use ($request) {
+                return $request['max_price'] >= $value['price'] && $value['price'] >= $request['min_price'];
+            });
+        }
+        $searchCollection = $searchCollection->sortBy([
+            ['selling','desc'],
+            ['review','desc'],
+            ['price','asc']
+        ]);
+        return $searchCollection;
     }
 }

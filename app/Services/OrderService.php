@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ESStatusType;
 use App\Enums\OrderStatusType;
 use App\Enums\PaymentStatusType;
 use App\Enums\ShippingStatusType;
@@ -97,6 +98,7 @@ class OrderService extends CommonService
         $product = Product::find($id);
         $amount = $product->amount - $amount;
         $product->amount = $amount;
+        $product->es_status = ESStatusType::IsUpdated;
         $product->save();
     }
 }

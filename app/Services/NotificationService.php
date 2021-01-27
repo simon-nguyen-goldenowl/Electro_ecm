@@ -12,8 +12,8 @@ class NotificationService
     protected $user;
     public function __construct(Request $request)
     {
-        $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
-        $this->user = User::find($payload->uid);
+       // $payload = JWT::decode($request->header('Authorization'), config('jwt.secret_key'), array('HS256'));
+       // $this->user = User::find($payload->uid);
     }
     public function sendNotifications($notiType)
     {

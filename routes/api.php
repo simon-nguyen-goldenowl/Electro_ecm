@@ -31,10 +31,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('logout', [AuthController::class, 'adminLogout']);
     Route::resource('brands', BrandController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::resource('users', UserController::class);
-
-        Route::resource('categories', CategoryController::class);
         Route::resource('orders', OrderController::class);
         Route::resource('wishlists', WishlistController::class);
         Route::resource('reviews', ReviewController::class);
@@ -53,4 +52,3 @@ Route::prefix('user')->group(function () {
     route::get('notifications', [UserController::class, 'showAllNoti'])->middleware('checkJWT');
     route::get('notifications/read', [UserController::class, 'readNoti'])->middleware('checkJWT');
 });
-
