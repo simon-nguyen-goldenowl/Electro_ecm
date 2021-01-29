@@ -63,6 +63,8 @@ Route::post('/wishlists/{id}', [WishListController::class, 'addWishlist']);
 
 //Routes are used to process authentication
 Route::post('/login', [AuthController::class, 'customerLogin']);
+Route::get('auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 Route::delete('/logout', [AuthController::class, 'logout']);
 
 //Routes are used to process reset password
@@ -70,7 +72,7 @@ Route::post('/password/check-mail', [AuthController::class,'checkMail']);
 Route::patch('/password/{id}/reset', [AuthController::class, 'resetPassword']);
 Route::patch('/password/{id}/change', [AuthController::class, 'changePassword']);
 
-//Routes are used to proccess search
+//Routes are used to process search
 Route::post('/search', [SearchController::class, 'submitSearch']);
 route::get('/autocomplete', [SearchController::class,'autoCompleteSearch']);
 

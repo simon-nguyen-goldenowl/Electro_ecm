@@ -33,6 +33,7 @@ class User extends Authenticatable
         'is_admin',
         'reset_key',
         'reset_key_time',
+        'google_id',
     ];
 
     /**

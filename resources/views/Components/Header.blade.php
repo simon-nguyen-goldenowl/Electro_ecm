@@ -10,13 +10,13 @@
             </ul>
             <ul class="header-links pull-right">
                 <li>
-                    @if(session()->has('user'))
+                    @if(session()->has('user') || session()->has('google_user'))
                         <a href="/profile"><i class="fa fa-user-o"></i> My Account</a>
                     @else
                         <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user-o"></i> login</a>
                     @endif
                 </li>
-                @if(session()->has('user'))
+                @if(session()->has('user') || session()->has('google_user'))
                     <li>
                         <a href="/orders"><i class="fa fa-first-order"></i> My Orders</a>
                     </li>
@@ -69,7 +69,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            @if(session()->has('user'))
+                            @if(session()->has('user') || session()->has('google_user'))
                                 <a href="/wishlists" class="wishlist">
                                     <i class="fa fa-heart-o"></i>
                                     <span>My Wishlist</span>
@@ -152,6 +152,12 @@
                     <a type="button" class="btn btn-danger" href="/register">Sign up</a>
                     <button type="button" onclick="getLogin()" class="btn btn-primary">Sign in</button>
                 </div>
+                <div class="flex items-center justify-end mt-4">
+                    <a href="{{ url('auth/google') }}">
+                        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                    </a>
+                </div>
+
             </div>
 
         </div>

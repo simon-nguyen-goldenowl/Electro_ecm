@@ -37,5 +37,10 @@ return [
         'app_id' => env('ONESIGNAL_APP_ID'),
         'rest_api_key' => env('ONESIGNAL_REST_API_KEY')
     ],
+    'google' => [
+        'client_id' => '813471872748-gppd7pg4rejg0bu9d8lfq9v2uoqgm2a5.apps.googleusercontent.com',
+        'client_secret' => 'gWWNlHJtFA_op1TpL64DK7Hq',
+        'redirect' => 'http://localhost:8000/auth/google/callback',
+    ],
 
 ];

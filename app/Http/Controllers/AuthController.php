@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Laravel\Socialite\Facades\Socialite;
 use Throwable;
 
 class AuthController extends Controller
@@ -47,6 +48,39 @@ class AuthController extends Controller
             session()->put('user', $user->id);
             return ResultType::Success;
         }
+    }
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleGoogleCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+            session()->put('google_user', $user->id);
+            return redirect('/')->with('message', 'login successfully');
+        } catch (\Exception $e) {
+            return redirect('/')->with('message', 'Something went wrong or You have rejected the app!');
+        }
+
+//            $finduser = User::where('google_id', $user->id)->first();
+//
+//            if ($finduser) {
+//                Auth::login($finduser);
+//
+//                return redirect()->intended('dashboard');
+//            } else {
+//                $newUser = User::create([
+//                    'name' => $user->name,
+//                    'email' => $user->email,
+//                    'google_id' => $user->id,
+//                    'password' => encrypt('123456dummy')
+//                ]);
+//
+//                Auth::login($newUser);
+//
+//                return redirect()->intended('dashboard');
+//            }
     }
     public function userLogin(Request $request) //apply JWT to authenticate
     {
