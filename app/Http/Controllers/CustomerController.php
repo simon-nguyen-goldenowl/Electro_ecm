@@ -99,7 +99,7 @@ class CustomerController extends Controller
 
     public function test(Request $request)
     {
-        return $this->searchService->fuzzySearch($request['q'], 0, 15);
+        return $this->searchService->multiMatchSearch($request['q'], 0, 15);
     }
     //FUNCTION TO DISPLAY PRODUCT_LIST COMPONENT
     public function displayProductListComponent(Request $request)
@@ -143,14 +143,19 @@ class CustomerController extends Controller
     //FUNCTION TO DISPLAY SEARCH PAGE
     public function displaySearchPage(Request $request)
     {
+        $cate = '';
         if ($request['q'] === null) {
             return redirect('/');
         }
         $brand = $this->brandService->getAllBrands($request);
         $attribute = $this->searchService->generateAttribute($request);
         $result = $this->searchService->getSearchList($attribute);
-        $product = $this->searchService->generateSearchList($request, $result);
         $total = $result['hits']['total']['value'];
+        $product = $this->searchService->generateSearchList($request, $result);
+        if ($request['cate_id'] !== null) {
+            $cate =  $this->categoryService->getById($request['cate_id'])->name;
+            $total = count($product);
+        }
         $paginate = $this->searchService->generatePaginate($attribute, $total);
         unset($request['brand_id']); //to get the correct top-selling list (no depend on brand)
         $top = $this->getTopSellingProduct($request);
@@ -160,6 +165,7 @@ class CustomerController extends Controller
             'products' => $product,
             'paginate' => $paginate,
             'key' => $request['q'],
+            'cate_name' => $cate,
             'total' => $total
         ]);
     }
@@ -170,6 +176,9 @@ class CustomerController extends Controller
         $result = $this->searchService->getSearchList($attribute);
         $product = $this->searchService->generateSearchList($request, $result);
         $total = $result['hits']['total']['value'];
+        if ($request['cate_id'] !== null) {
+            $total = count($product);
+        }
         $paginate = $this->searchService->generatePaginate($attribute, $total);
         return view('Components.SearchProductList')->with([
             'products' => $product,

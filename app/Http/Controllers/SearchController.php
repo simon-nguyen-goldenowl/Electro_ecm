@@ -15,11 +15,12 @@ class SearchController extends Controller
     public function autoCompleteSearch(Request $request)
     {
         $key = $request['q'];
-        $result = $this->searchService->autoCompleteSearch($key);
-        return $this->searchService->showSuggestList($result, $key);
+        $cate_id = $request['cate_id'];
+        $result = $this->searchService->autoCompleteSearch($key, 0, 5);
+        return $this->searchService->showSuggestList($result, $request);
     }
     public function submitSearch(Request $request)
     {
-        return redirect('/search?q=' . $request['q']);
+        return redirect('/search?q=' . $request['q'] . '&cate_id=' . $request['cate_id']);
     }
 }

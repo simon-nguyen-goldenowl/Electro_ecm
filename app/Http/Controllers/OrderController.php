@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\OrderStatusType;
 use App\Http\Requests\OrderRequest;
-use App\Models\User;
-use App\Notifications\SubmitOrder;
 use App\Services\CartService;
 use App\Services\OrderService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -31,12 +29,13 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
-        $result = $this->orderService->create($request->input());
-        $this->orderService->addItem($result->id);
-        $this->cartService->deleteCart();
-        return $result;
+        DB::transaction(function () use ($request) {
+            $result = $this->orderService->create($request->input());
+            $this->orderService->addItem($result->id);
+            $this->cartService->deleteCart();
+            return $result;
+        });
     }
-
     //FUNCTIONS RETURN API
     /**
      * Display a listing of the resource.

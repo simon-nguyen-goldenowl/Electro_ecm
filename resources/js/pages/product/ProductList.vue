@@ -169,6 +169,7 @@ export default {
             list_products: [],
             list_notifications: [],
             list_errors: [],
+        });
             filter: [],
         }
     },
@@ -178,25 +179,24 @@ export default {
         this.getCategoryList();
         this.filter.max_price = DefaultConstants.maxPrice;
         this.filter.min_price = DefaultConstants.minPrice;
-    },
+    },is.filter.max_price = DefaultConstants.maxPrice;
+}
+if( this.filter.min_price === ''){
+    this.filter.min_price = DefaultConstants.minPrice;
+}
+let url = this.getUrl();
+axios.get(url)
+    .then(response=> {
+            this.list_products = response.data;
+            console.log(url)
+        },
+        getUrl(){
+    let url= UrlConstants.product + '?column=' + this.column
+        + '&s
     methods: {
         getFilter(){
             if( this.filter.max_price === ''){
-                this.filter.max_price = DefaultConstants.maxPrice;
-            }
-            if( this.filter.min_price === ''){
-                this.filter.min_price = DefaultConstants.minPrice;
-            }
-            let url = this.getUrl();
-            axios.get(url)
-                .then(response=> {
-                this.list_products = response.data;
-                    console.log(url)
-                });
-        },
-        getUrl(){
-            let url= UrlConstants.product + '?column=' + this.column
-                                          + '&sort=' + this.sort
+                thort=' + this.sort
                                           + '&limit=' + this.limit
             Object.entries(this.filter).forEach(([key, value])=>{
                 if(value !== ''){

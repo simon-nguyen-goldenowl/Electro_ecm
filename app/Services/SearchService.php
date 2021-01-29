@@ -16,10 +16,11 @@ class SearchService
         $this->client = ClientBuilder::create()->build();
     }
 
-    public function autoCompleteSearch($key)
+    public function autoCompleteSearch($key, $from, $size)
     {
         $params = [
-            'size' => '5',
+            'from' => $from,
+            'size' => $size,
             'index' => 'products', //search in all indexes
             'body'  => [
                 'query' => [
@@ -62,9 +63,9 @@ class SearchService
                 'query' => [
                     'bool' => [
                         'should' => [
-                            ['fuzzy' => ['name' => ['value' =>   $key, 'fuzziness' => '2']]],
-                            ['fuzzy' => ['brand_name' => ['value' =>   $key, 'fuzziness' => '2']]],
-                            ['fuzzy' => ['cate_name' => ['value' =>   $key, 'fuzziness' => '2']]],
+                            ['fuzzy' => ['name' => ['value' =>   $key, 'fuzziness' => 'AUTO']]],
+                            ['fuzzy' => ['brand_name' => ['value' =>   $key, 'fuzziness' => 'AUTO']]],
+                            ['fuzzy' => ['cate_name' => ['value' =>   $key, 'fuzziness' => 'AUTO']]],
                         ]
                     ]
                 ],
@@ -89,6 +90,8 @@ class SearchService
                 'highlight' => $highlight,
                 'image' => $item['_source']['image'],
                 'price' => $item['_source']['price'],
+                'cate_id' => $item['_source']['cate_id'],
+                'brand_id' => $item['_source']['brand_id'],
                 'amount' => $item['_source']['amount'],
                 'selling' => $item['_source']['selling'],
                 'review' => $item['_source']['review'],
@@ -123,9 +126,11 @@ class SearchService
         return $attribute;
     }
 
-    public function showSuggestList($result, $key)
+    public function showSuggestList($result, Request $request)
     {
+        $key = $request['q'];
         $search_list = $this->preprocessSearchResult($result, $key);
+        $search_list = $this->getFilter($request, $search_list);
         $output = '';
         if (count($search_list) > 0) {
             // concatenate output to the array
@@ -157,6 +162,9 @@ class SearchService
         $size = $attribute['size'];
         $result = $this->fuzzySearch($key, $from, $size);
         if ($result['hits']['total']['value'] === 0) {
+            $result = $this->autoCompleteSearch($key, $from, $size);
+        }
+        if ($result['hits']['total']['value'] === 0) {
             $result = $this->multiMatchSearch($key, $from, $size);
         }
         return $result;
@@ -183,11 +191,16 @@ class SearchService
 
 
 
-    public function getFilter(Request $request, $searchCollection)
+    protected function getFilter(Request $request, $searchCollection)
     {
         if (isset($request['min_price'])) {
             $searchCollection = $searchCollection->filter(function ($value, $key) use ($request) {
                 return $request['max_price'] >= $value['price'] && $value['price'] >= $request['min_price'];
+            });
+        }
+        if ($request['cate_id'] !== null) {
+            $searchCollection = $searchCollection->filter(function ($value, $key) use ($request) {
+                return $value['cate_id'] == $request['cate_id'];
             });
         }
         $searchCollection = $searchCollection->sortBy([

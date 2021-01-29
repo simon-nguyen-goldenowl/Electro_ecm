@@ -72,8 +72,7 @@
                 <div id="store" class="col-md-9">
                     <!-- store top filter -->
                     <div class="store-filter clearfix">
-                        @if($key !== null)
-                            <h4><p>{{$total}} results found for: "{{$key}}"</p></h4>
+                            <h4>{{$total}} results found for: "{{$key}}"@if($cate_name !== '') in {{$cate_name}} @endif</h4>
                         <div class="store-sort">
                             <label>
                                 Sort By Price:
@@ -103,10 +102,6 @@
                     <div id="proID">
                         @include('Components.SearchProductList')
                     </div>
-                    @else
-                        <h1>Nothing found</h1>
-                        <h3>Back to <a href="/">Home Page</a></h3>
-                    @endif
                 </div>
                 <!-- /STORE -->
             </div>

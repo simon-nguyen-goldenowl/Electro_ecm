@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Mail;
 
 class UserService extends CommonService
 {
-
     public function getModel()
     {
         return User::class;
